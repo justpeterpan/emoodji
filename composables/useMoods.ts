@@ -1,14 +1,10 @@
-export const useMoods = async (key: string, table: string, properties: string) => {
-  interface Mood {
-    name: string
-    icon: string
-  }
-
+import { Mood } from '~/types'
+export const useMoods = async (properties: string) => {
   const client = useSupabaseClient()
   const { data, pending } = await useAsyncData(
-    key,
+    'moods',
     async () => {
-      return await client.from<Mood>(table).select(properties)
+      return await client.from<Mood>('emoodji').select(properties)
     },
     { initialCache: false, transform: (result) => result.body }
   )

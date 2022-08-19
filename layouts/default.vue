@@ -1,8 +1,8 @@
 <template>
   <div>
     <AppLayoutTheLogo />
-    <main class='bg-green-100 min-h-screen px-8'>
-      <slot></slot>
+    <main class="bg-green-100 min-h-screen px-8">
+      <slot />
     </main>
   </div>
 </template>

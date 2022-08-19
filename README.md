@@ -8,6 +8,8 @@ Simple webapp to track your mood throughout the day.
 ### Built With
 
 - [Nuxt3](https://v3.nuxtjs.org/)
+- [Supabase](https://supabase.com/)
+- [Nuxt Supabase](https://supabase.nuxtjs.org/)
 - [VueUse](https://vueuse.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Pinia](https://pinia.vuejs.org/)
@@ -26,7 +28,7 @@ To get a local instance up and running follow these simple (or not, looking at y
 - [Install Node.js v18 via n](https://github.com/tj/n) or [Install Node.js v18 via nvm](https://github.com/nvm-sh/nvm)
 - [Install Pnpm](https://pnpm.io/installation)
 - Clone the repo `git clone git@github.com:justpeterpan/emoodji.git`
-- Install dependencies with `pnpm -i --shamefully-hoist` (Even tho Nuxt3 documentation recommends installing dependencies with the `--shamefully-hoist` option it is [highly discouraged](https://pnpm.io/cli/install#--shamefully-hoist) by Pnpm itself)
+- Install dependencies with `pnpm i --shamefully-hoist` (Even tho Nuxt3 documentation recommends installing dependencies with the `--shamefully-hoist` option it is [highly discouraged](https://pnpm.io/cli/install#--shamefully-hoist) by Pnpm itself)
 - Finally start the dev server on http://localhost:3000 `pnpm dev`
 
 ## Contributing

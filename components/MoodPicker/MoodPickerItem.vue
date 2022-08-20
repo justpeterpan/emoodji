@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang='ts'>
-
 defineProps({
   icon: {
     type: String,
@@ -19,5 +18,4 @@ defineProps({
     required: true
   }
 })
-
 </script>

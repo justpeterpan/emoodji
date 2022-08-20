@@ -3,7 +3,16 @@
 module.exports = {
   content: [],
   theme: {
-    extend: {}
+    extend: {
+      boxShadow: {
+        'brutal': '4px 4px 0px 4px #0C0C0F',
+      },
+      color: {
+        'green': '#33FF8F',
+        'pink': '#FF6197',
+        'black': '#0C0C0F'
+      },
+    }
   },
   plugins: [],
   safelist: ['bg-[#3E3E3E]', 'text-white']

@@ -1,8 +1,11 @@
 <template>
-  <div v-if="!moodsPending && !themePending" :class="themeColors">
-    <h1 class="text-5xl">emoodji</h1>
-    <div v-for="mood of moods" :key="mood.name">{{ mood.name }} {{ mood.icon }}</div>
-  </div>
+  <main v-if="!moodsPending && !themePending" class="bg-pink-500 min-h-screen flex flex-col justify-center" :class="themeColors">
+    <div class='max-w-sm mx-auto'>
+      <div class='grid grid-cols-2 gap-8'>
+        <MoodBox v-for="mood of moods" :key="mood.name" :name='mood.name' :icon='mood.icon'></MoodBox>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">

@@ -1,26 +1,25 @@
 <template>
-  <div
-    ref='moodPicker'
-    class="mood-picker-item"
-  >
+  <div ref="moodPicker" class="mood-picker-item">
     <div
-:class='{
-      "cursor-pointer" : isFlippable
-    }' class='mood-picker-item-inner bg-white border-4 border-black rounded shadow-brutal text-center transition-transform'>
-      <div class='mood-picker-item-front flex flex-col items-center justify-center' @click='flipBox()'>
-        <span class="text-5xl block mb-2">{{ icon }}</span>
-        {{ name }}
+      :class="{
+        'cursor-pointer': props.isFlippable
+      }"
+      class="mood-picker-item-inner bg-white border-4 border-black rounded shadow-brutal text-center transition-transform"
+    >
+      <div class="mood-picker-item-front flex flex-col items-center justify-center" @click="flipBox()">
+        <span class="text-5xl block mb-2">{{ props.icon }}</span>
+        {{ props.name }}
       </div>
-      <div class='mood-picker-item-back p-4 flex flex-col justify-between'>
+      <div class="mood-picker-item-back p-4 flex flex-col justify-between">
         <div>
-          <p class='font-bold mb-2'>Add a comment</p>
-          <input v-model='description' class='mb-2 block bg-gray-600 text-white rounded shadow-brutal-sm w-full p-2' type='text'>
+          <p class="font-bold mb-2">Add a comment</p>
+          <input v-model="description" class="mb-2 block bg-gray-600 text-white rounded shadow-brutal-sm w-full p-2" type="text" />
           <button class="bg-green-500 block font-bold rounded shadow-brutal-sm w-full py-2" @click="emit('pick-mood', description)">
             Pick mood
           </button>
         </div>
         <div>
-          <button @click='flipBox()'>Back</button>
+          <button @click="flipBox()">Back</button>
         </div>
       </div>
     </div>
@@ -31,11 +30,13 @@
 const props = defineProps({
   icon: {
     type: String,
-    required: true
+    required: false,
+    default: ''
   },
   name: {
     type: String,
-    required: true
+    required: false,
+    default: ''
   },
   isFlippable: {
     type: Boolean,
@@ -47,13 +48,11 @@ const props = defineProps({
 const moodPicker = ref(null)
 
 const flipBox = () => {
-  if(props.isFlippable) moodPicker.value.classList.toggle('flipped')
+  if (props.isFlippable) moodPicker.value.classList.toggle('flipped')
 }
 
 const emit = defineEmits(['pick-mood'])
 const description = ref('')
-
-
 </script>
 
 <style>
@@ -75,7 +74,7 @@ const description = ref('')
 }
 
 .mood-picker-item-front,
-.mood-picker-item-back{
+.mood-picker-item-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -86,5 +85,4 @@ const description = ref('')
 .mood-picker-item-back {
   transform: rotateY(180deg);
 }
-
 </style>

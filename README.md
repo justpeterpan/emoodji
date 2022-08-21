@@ -1,9 +1,23 @@
 # emoodji 👋
 
-## About the Project
+## About the Project (aka [Hackathon Checklist](https://www.madewithsupabase.com/launch-week-5))
+
+[live demo](https://emoooodji.netlify.app/)
 
 ![Website Screenshot](docs/screen.png)  
-Simple webapp to track your mood throughout the day.
+Simple webapp to track your mood throughout the week.  
+
+- Makes us of the magic link login auth functionality provided by [supabase](https://supabase.com/).
+- Stores tracked moods in supabase and is secured bei RLS + policies.
+- Motivated by our day job and biweekly retrospectives, we aimed for a simple and easy to use app, to track our mood changes throughout our sprints - without any friction (looking at you unnecessary registrations & forgotten passwords). and a top notch DX by supabase made the challenge more than fun. 
+- We've used the opportunity to familiarize ourselves with new technologies (vue3 & Nuxt3, coming from vue2 & Nuxt2)
+- Started with [figma](https://www.figma.com/file/gtbyYsAGDegRKjoLdCQZmg/emoodji?node-id=0%3A1), ended up in voicechat fixing last bugs (more to come...)
+- Future plans: fixing bugs, adding more features (launch week 5 gave us even more inspiration)
+
+### Builty By
+
+- MogliCodes [@github](https://github.com/MogliCodes) [@twitter](https://twitter.com/mogli_codes)
+- justpeterpan [@github](https://github.com/justpeterpan) [lurking@twitter](https://twitter.com/illskratch)
 
 ### Built With
 
@@ -18,6 +32,9 @@ Simple webapp to track your mood throughout the day.
 - [Prettier](https://prettier.io/)
 - [Pnpm](https://pnpm.io/)
 - [Node.js v18](https://nodejs.org/en/)
+- [Netlify](https://www.netlify.com/)
+- [Flaticons](https://www.flaticon.com/)
+- blood, sweat & tears
 
 ## Getting Started
 

@@ -10,6 +10,7 @@ specifiers:
   '@vueuse/core': ^9.1.0
   '@vueuse/nuxt': ^9.1.0
   chart.js: ^3.9.1
+  chartjs-plugin-zoom: ^1.2.1
   eslint: ^8.21.0
   eslint-config-prettier: ^8.5.0
   nuxt: 3.0.0-rc.8
@@ -24,6 +25,7 @@ dependencies:
   '@pinia/nuxt': 0.4.0
   pinia: 2.0.20
   chart.js: 3.9.1
+  chartjs-plugin-zoom: 1.2.1_chart.js@3.9.1
   vue-chart-3: 3.1.8_chart.js@3.9.1
 
 devDependencies:
@@ -2063,6 +2065,15 @@ packages:
     resolution: {integrity: sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==}
     dev: false
 
+  /chartjs-plugin-zoom/1.2.1_chart.js@3.9.1:
+    resolution: {integrity: sha512-2zbWvw2pljrtMLMXkKw1uxYzAne5PtjJiOZftcut4Lo3Ee8qUt95RpMKDWrZ+pBZxZKQKOD/etdU4pN2jxZUmg==}
+    peerDependencies:
+      chart.js: ^3.2.0
+    dependencies:
+      chart.js: 3.9.1
+      hammerjs: 2.0.8
+    dev: false
+
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
     engines: {node: '>= 8.10.0'}
@@ -4021,6 +4032,11 @@ packages:
       radix3: 0.1.2
       ufo: 0.8.5
     dev: true
+
+  /hammerjs/2.0.8:
+    resolution: {integrity: sha512-tSQXBXS/MWQOn/RKckawJ61vvsDpCom87JgxiYdGwHdOa0ht0vzUWDlfioofFCRU0L+6NGDt6XzbgoJvZkMeRQ==}
+    engines: {node: '>=0.8.0'}
+    dev: false
 
   /has-bigints/1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}

@@ -10,6 +10,7 @@
 <script setup lang="ts">
 import { LineChart } from 'vue-chart-3';
 import { Chart, registerables } from "chart.js"
+// import zoomPlugin from 'chartjs-plugin-zoom';
 
 definePageMeta({
   middleware: 'auth'
@@ -19,6 +20,7 @@ const user = useSupabaseUser()
 const { data: pickedMoods } = await usePickedMoods(user.value?.id)
 const { data: allMoods } = await useMoods()
 Chart.register(...registerables);
+// Chart.register(...registerables, zoomPlugin);
 
 const xAxisLabels = []
 const yAxisLabels = []
@@ -60,7 +62,12 @@ const chartOptions =  {
   plugins: {
     legend: {
       display: false
-    }
+    },
+    // zoom: {
+    //   pan: {
+    //     mode: 'x'
+    //   }
+    // }
   },
   scales: {
     x: {
@@ -71,7 +78,7 @@ const chartOptions =  {
         },
         autoSkip: false,
         maxRotation: 45,
-        minRotation: 45
+        minRotation: 45,
       }
     },
     y: {

@@ -12,9 +12,11 @@ specifiers:
   eslint: ^8.21.0
   eslint-config-prettier: ^8.5.0
   nuxt: 3.0.0-rc.8
+  pinia: ^2.0.20
 
 dependencies:
   '@pinia/nuxt': 0.4.0
+  pinia: 2.0.20
 
 devDependencies:
   '@nuxt/types': 2.15.8
@@ -844,7 +846,7 @@ packages:
     resolution: {integrity: sha512-gJ0qRJ5KhpFrYVs6qdqTWXPp9DAzbs9u74zJw5hyQO7tRiItRUYQxbWtWjGC3XUw5oO73xYrA8lYa5/GMW0uSg==}
     dependencies:
       '@nuxt/kit': 3.0.0-rc.6
-      pinia: 2.0.18
+      pinia: 2.0.20
     transitivePeerDependencies:
       - '@vue/composition-api'
       - esbuild
@@ -5442,8 +5444,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /pinia/2.0.18:
-    resolution: {integrity: sha512-I5MW05UVX6a5Djka136oH3VzYFiZUgeOApBwFjMx6pL91eHtGVlE3adjNUKLgtwGnrxiBRuJ8+4R3LKJKwnyZg==}
+  /pinia/2.0.20:
+    resolution: {integrity: sha512-fdHHumXW/0U5HhxmY1emo3I4z85p8NJPdbtFQSlmJXFe3ktuF0pYNVgVtk2q+j2zCtTufY763xzaEMx0t6T59g==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'

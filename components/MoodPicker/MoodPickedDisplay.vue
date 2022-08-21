@@ -3,7 +3,7 @@
     <div class="max-w-sm mx-auto">
       <h1 class="font-bold text-2xl mb-8 text-center">You picked:</h1>
       <div v-if="mood?.created_at" class="w-full">
-        <MoodPickerItem class="w-full" :name="mood.emoodji.name" :icon="mood.emoodji.icon" />
+        <MoodPickerItem :is-flippable='false' class="w-full" :name="mood.emoodji.name" :icon="mood.emoodji.icon" />
       </div>
     </div>
   </section>

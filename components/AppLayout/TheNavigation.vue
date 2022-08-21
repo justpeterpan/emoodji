@@ -38,6 +38,11 @@ const toggleNav = () => {
   navItems.value?.classList.toggle('is-active')
 }
 
+onClickOutside(navToggle, () => {
+  navToggle.value.classList.remove('is-active')
+  navItems.value?.classList.remove('is-active')
+})
+
 interface NavItem {
   imgSrc: string
   path: string
@@ -46,17 +51,17 @@ interface NavItem {
 
 const nav: NavItem[] = [
   {
-    imgSrc: '../assets/images/icon-select.png',
+    imgSrc: '/images/icon-select.png',
     path: '/',
     position: 'bottom-20'
   },
   {
-    imgSrc: '../assets/images/icon-graph.png',
+    imgSrc: '/images/icon-graph.png',
     path: '/overview',
     position: 'bottom-14 left-14'
   },
   {
-    imgSrc: '../assets/images/icon-settings.png',
+    imgSrc: '/images/icon-settings.png',
     path: '/logout',
     position: 'left-20'
   }

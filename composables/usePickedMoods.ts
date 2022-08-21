@@ -6,7 +6,7 @@ export const usePickedMoods = async (userId: string | undefined) => {
     async () => {
       return await client
         .from<PickedMood>('pickedMood')
-        .select(`id, moodId, changed, description, emoodji(*)`)
+        .select(`id, moodId, created_at, changed, description, emoodji(*)`)
         .eq('userId', userId)
         .order('created_at')
     },

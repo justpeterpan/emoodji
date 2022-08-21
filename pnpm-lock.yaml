@@ -14,18 +14,14 @@ specifiers:
   eslint: ^8.21.0
   eslint-config-prettier: ^8.5.0
   nuxt: 3.0.0-rc.8
-<<<<<<< HEAD
-  vue-chartjs: ^4.1.1
   pinia: ^2.0.20
-=======
   vue-chart-3: ^3.1.8
->>>>>>> 14e6d87 (style overview table)
 
 dependencies:
   '@pinia/nuxt': 0.4.0
-  pinia: 2.0.20
   chart.js: 3.9.1
   chartjs-plugin-zoom: 1.2.1_chart.js@3.9.1
+  pinia: 2.0.20
   vue-chart-3: 3.1.8_chart.js@3.9.1
 
 devDependencies:

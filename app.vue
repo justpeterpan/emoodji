@@ -5,3 +5,9 @@
     </NuxtLayout>
   </div>
 </template>
+
+<!-- <script>
+useHead({
+  title: 'emoooodji - how ya doin?'
+})
+</script> -->

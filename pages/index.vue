@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div v-if="!moodState.hasPickedMood && !moodsPending">
+    <div v-if="!moodState.$state.hasPickedMood && !moodsPending">
       <MoodPicker :moods="moods" />
     </div>
-    <div v-if="moodState.hasPickedMood && !todaysMoodPending">
-      <MoodPickedDisplay :mood="todaysMood" />
+    <div v-if="moodState.$state.hasPickedMood && !todaysMoodPending">
+      <MoodPickedDisplay :mood="moodState.$state.pickedMood" />
     </div>
   </div>
 </template>
@@ -17,14 +17,15 @@ definePageMeta({
 const user = useSupabaseUser()
 const { data: moods, pending: moodsPending } = await useMoods('name, icon, id')
 const { data: lastChosenMood, pending: todaysMoodPending } = await useLatestChosenMood(user.value?.id)
-const todaysMood = lastChosenMood.value?.find((mood) => mood.created_at)
 const today = new Date().toISOString().slice(0, 10)
 const moodState = useMood()
+const todaysMood = lastChosenMood.value?.find((mood) => mood?.created_at)
+
 onMounted(() => {
   if (today === todaysMood?.created_at?.slice(0, 10)) {
-    moodState.setHasPickedMood(true)
+    moodState.setMood(true, todaysMood)
   } else {
-    moodState.setHasPickedMood(false)
+    moodState.setMood(false, null)
   }
 })
 </script>

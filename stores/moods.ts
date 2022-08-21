@@ -1,11 +1,14 @@
 import { defineStore } from 'pinia'
+import { PickedMood } from '~/types'
 
 export const useMood = defineStore('mood', {
   state: () => ({
-    hasPickedMood: false
+    hasPickedMood: false,
+    pickedMood: null as PickedMood | null
   }),
   actions: {
-    setHasPickedMood(picked: boolean) {
+    setMood(picked: boolean, mood: PickedMood | null) {
+      this.pickedMood = mood
       this.hasPickedMood = picked
     }
   }

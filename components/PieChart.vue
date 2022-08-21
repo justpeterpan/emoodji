@@ -1,6 +1,3 @@
-
-
-
 <template>
   <div>
     <PieChart />
@@ -8,5 +5,5 @@
 </template>
 
 <script setup>
-  import PieChart from './components/pieChart'
+import PieChart from './components/pieChart'
 </script>

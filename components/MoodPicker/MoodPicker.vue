@@ -1,9 +1,9 @@
 <template>
   <section class="py-24">
     <div class="max-w-sm mx-auto">
-      <h1 class="font-bold text-2xl mb-8 text-center">Pick a mood</h1>
+      <h1 class="font-bold text-2xl mb-8 text-center">How ya doin?</h1>
       <div class="grid grid-cols-2 gap-8">
-        <MoodPickerItem v-for="mood of moods" :key="mood.name" v-bind="mood" @pickMood='pickMood(mood, $event)' />
+        <MoodPickerItem v-for="mood of moods" :key="mood.name" v-bind="mood" @pickMood="pickMood(mood, $event)" />
       </div>
     </div>
   </section>
@@ -22,6 +22,7 @@ const pickMood = async (mood: Mood, description: any) => {
     userId: user.value?.id,
     description
   })
-  useMood().setHasPickedMood(true)
+  useMood().setMood(true, { moodId: mood.id, userId: user.value?.id, changed: 0, description, emoodji: mood })
+  useRouter().go(0)
 }
 </script>

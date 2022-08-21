@@ -9,14 +9,18 @@ specifiers:
   '@pinia/nuxt': ^0.4.0
   '@vueuse/core': ^9.1.0
   '@vueuse/nuxt': ^9.1.0
+  chart.js: ^3.9.1
   eslint: ^8.21.0
   eslint-config-prettier: ^8.5.0
   nuxt: 3.0.0-rc.8
+  vue-chartjs: ^4.1.1
   pinia: ^2.0.20
 
 dependencies:
   '@pinia/nuxt': 0.4.0
   pinia: 2.0.20
+  chart.js: 3.9.1
+  vue-chartjs: 4.1.1_chart.js@3.9.1
 
 devDependencies:
   '@nuxt/types': 2.15.8
@@ -2054,6 +2058,10 @@ packages:
   /chardet/0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
+
+  /chart.js/3.9.1:
+    resolution: {integrity: sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==}
+    dev: false
 
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
@@ -7358,6 +7366,15 @@ packages:
     dependencies:
       ufo: 0.8.5
     dev: true
+
+  /vue-chartjs/4.1.1_chart.js@3.9.1:
+    resolution: {integrity: sha512-rKIQ3jPrjhwxjKdNJppnYxRuBSrx4QeM3nNHsfIxEqjX6QS4Jq6e6vnZBxh2MDpURDC2uvuI2N0eIt1cWXbBVA==}
+    peerDependencies:
+      chart.js: ^3.7.0
+      vue: ^3.0.0-0 || ^2.6.0
+    dependencies:
+      chart.js: 3.9.1
+    dev: false
 
   /vue-demi/0.13.7:
     resolution: {integrity: sha512-hbhlvpx1gFW3TB5HxJ0mNxyA9Jh5iQt409taOs6zkhpvfJ7YzLs1rsLufJmDsjH5PI1cOyfikY1fE/meyHfU5A==}

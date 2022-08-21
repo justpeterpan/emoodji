@@ -3,7 +3,7 @@
     <div class="max-w-sm mx-auto">
       <h1 class="font-bold text-2xl mb-8 text-center">Pick a mood</h1>
       <div class="grid grid-cols-2 gap-8">
-        <MoodPickerItem v-for="mood of moods" :key="mood.name" v-bind="mood" @click="pickMood(mood)" />
+        <MoodPickerItem v-for="mood of moods" :key="mood.name" v-bind="mood" @pickMood='pickMood(mood, $event)' />
       </div>
     </div>
   </section>
@@ -14,14 +14,13 @@ import { Mood, PickedMood } from '~/types'
 import { useMood } from '~/stores/moods'
 const client = useSupabaseClient()
 const user = useSupabaseUser()
-const description = ref('')
 
 defineProps<{ moods: Mood[] | null }>()
-const pickMood = async (mood: Mood) => {
+const pickMood = async (mood: Mood, description: any) => {
   await client.from<PickedMood>('pickedMood').insert({
     moodId: mood.id,
     userId: user.value?.id,
-    description: description.value
+    description
   })
   useMood().setHasPickedMood(true)
 }

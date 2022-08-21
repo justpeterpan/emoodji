@@ -33,7 +33,7 @@ allMoods.value.forEach( mood => {
 const dateLocale = 'en-GB'
 const dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }
 pickedMoods.value.forEach( mood => {
-  const date = new Date(mood.emoodji.created_at)
+  const date = new Date(mood.created_at)
   const dateFormatted = date.toLocaleDateString(dateLocale, dateOptions)
   xAxisLabels.push(dateFormatted)
   pickedMoodsValues.push(mood.emoodji.value)

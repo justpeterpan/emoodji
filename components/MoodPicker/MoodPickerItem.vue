@@ -4,7 +4,7 @@
       :class="{
         'cursor-pointer': props.isFlippable
       }"
-      class="mood-picker-item-inner bg-white border-4 border-black rounded shadow-brutal text-center transition-transform"
+      class="mood-picker-item-inner border-4 border-black rounded shadow-brutal text-center transition-transform"
     >
       <div class="mood-picker-item-front flex flex-col items-center justify-center" @click="flipBox()">
         <span class="text-5xl block mb-2">{{ props.icon }}</span>
@@ -75,6 +75,7 @@ const description = ref('')
 
 .mood-picker-item-front,
 .mood-picker-item-back {
+  background: #fff;
   position: absolute;
   width: 100%;
   height: 100%;

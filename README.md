@@ -7,8 +7,8 @@
 ![Website Screenshot](docs/screen.png)  
 Simple webapp to track your mood throughout the week.  
 
-- Makes us of the magic link login auth functionality provided by [supabase](https://supabase.com/).
-- Stores tracked moods in supabase and is secured bei RLS + policies.
+- Makes use of the magic link login auth functionality provided by [supabase](https://supabase.com/).
+- Stores tracked moods in supabase and is secured by RLS + policies.
 - Motivated by our day job and biweekly retrospectives, we aimed for a simple and easy to use app, to track our mood changes throughout our sprints - without any friction (looking at you unnecessary registrations & forgotten passwords). and a top notch DX by supabase made the challenge more than fun. 
 - We've used the opportunity to familiarize ourselves with new technologies (vue3 & Nuxt3, coming from vue2 & Nuxt2)
 - Started with [figma](https://www.figma.com/file/gtbyYsAGDegRKjoLdCQZmg/emoodji?node-id=0%3A1), ended up in voicechat fixing last bugs (more to come...)

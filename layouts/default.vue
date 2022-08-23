@@ -1,16 +1,14 @@
 <template>
   <div>
-    <AppLayoutTheLogo />
+    <MoodLogo />
     <main class="bg-green-100 min-h-screen px-8">
       <slot />
     </main>
-    <TheNavigation v-if='!!user' />
+    <MoodNavigation v-if="!!user" />
   </div>
 </template>
 
-<script setup lang='ts'>
-import TheNavigation from '../components/AppLayout/TheNavigation'
-
+<script setup lang="ts">
 const user = useSupabaseUser()
 </script>
 

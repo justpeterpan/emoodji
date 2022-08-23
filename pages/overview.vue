@@ -30,6 +30,7 @@ interface YAxisItem {
 const xAxisLabels: string[] = []
 const yAxisLabels: YAxisItem[] = []
 const pickedMoodsValues: number[] = []
+const pickedMoodsDescriptions: string[] = []
 
 allMoods?.value?.forEach((mood) => {
   yAxisLabels.push({ icon: mood.icon, value: mood.value })
@@ -41,6 +42,7 @@ if (pickedMoods.value?.length) {
     const dateFormatted = date.toLocaleDateString('en-GB', { month: 'numeric', day: 'numeric' })
     xAxisLabels.push(dateFormatted)
     pickedMoodsValues.push(mood.emoodji.value)
+    pickedMoodsDescriptions.push(mood.description)
   })
 }
 
@@ -54,6 +56,10 @@ const chartData = {
       pointBorderColor: '#0C0C0F',
       pointBorderWidth: '2',
       pointBackgroundColor: '#DCFCE7',
+      pointHoverRadius: 7,
+      pointHoverBorderColor: '#0C0C0F',
+      pointHoverBorderWidth: '2',
+      pointHoverBackgroundColor: '#FF6197',
       borderColor: '#0C0C0F',
       borderWidth: '2'
     }
@@ -66,6 +72,13 @@ const chartOptions = {
   plugins: {
     legend: {
       display: false
+    },
+    tooltip: {
+      callbacks: {
+        label: (context) => {
+          return pickedMoodsDescriptions[context.dataIndex]
+        }
+      }
     }
   },
   scales: {

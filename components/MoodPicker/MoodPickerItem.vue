@@ -1,5 +1,5 @@
 <template>
-  <div ref="moodPicker" class="mood-picker-item">
+  <div class="mood-picker-item" :class="{ flipped: isFlipped }">
     <div
       :class="{
         'cursor-pointer': props.isFlippable
@@ -9,11 +9,12 @@
       <div class="mood-picker-item-front flex flex-col items-center justify-center" @click="flipBox()">
         <span class="text-5xl block mb-2">{{ props.icon }}</span>
         {{ props.name }}
+        <div v-if="props.description" class="italic">„{{ props.description }}“</div>
       </div>
       <div class="mood-picker-item-back p-4 flex flex-col justify-between">
         <div>
-          <p class="font-bold mb-2">Add a comment</p>
-          <input v-model="description" class="mb-2 block bg-gray-600 text-white rounded shadow-brutal-sm w-full p-2" type="text" />
+          <p class="font-bold mb-2">tell me y</p>
+          <input v-model="description" class="mb-2 block bg-gray-500 text-white rounded shadow-brutal-sm w-full p-2" type="text" />
           <button class="bg-green-500 block font-bold rounded shadow-brutal-sm w-full py-2" @click="emit('pick-mood', description)">
             Pick mood
           </button>
@@ -27,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+// TODO refactor defineProps
 const props = defineProps({
   icon: {
     type: String,
@@ -38,6 +40,11 @@ const props = defineProps({
     required: false,
     default: ''
   },
+  description: {
+    type: String,
+    required: false,
+    default: ''
+  },
   isFlippable: {
     type: Boolean,
     required: false,
@@ -45,12 +52,10 @@ const props = defineProps({
   }
 })
 
-const moodPicker = ref(null)
-
+const isFlipped = ref(false)
 const flipBox = () => {
-  if (props.isFlippable) moodPicker.value.classList.toggle('flipped')
+  if (props.isFlippable) isFlipped.value = !isFlipped.value
 }
-
 const emit = defineEmits(['pick-mood'])
 const description = ref('')
 </script>

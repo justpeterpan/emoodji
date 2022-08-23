@@ -22,7 +22,6 @@ const pickMood = async (mood: Mood, description: any) => {
     userId: user.value?.id,
     description
   })
-  useMood().setMood(true, { moodId: mood.id, userId: user.value?.id, changed: 0, description, emoodji: mood })
-  useRouter().go(0)
+  useMood().setMood(true, { moodId: mood.id, userId: user.value?.id!, changed: 0, description, emoodji: mood })
 }
 </script>

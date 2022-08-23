@@ -6,8 +6,8 @@
   </div>
 </template>
 
-<!-- <script>
+<script setup lang="ts">
 useHead({
   title: 'emoooodji - how ya doin?'
 })
-</script> -->
+</script>

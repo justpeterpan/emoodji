@@ -7,9 +7,15 @@ export type Mood = {
 
 export type PickedMood = {
   moodId: number
-  userId?: string
+  userId: string
   changed: number
   emoodji: Mood
   description?: string
   created_at?: string
-} | null
+}
+
+export interface NavItem {
+  imgSrc: string
+  path: string
+  position: string
+}

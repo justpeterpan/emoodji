@@ -4,7 +4,7 @@ import { PickedMood } from '~/types'
 export const useMood = defineStore('mood', {
   state: () => ({
     hasPickedMood: false,
-    pickedMood: null as PickedMood | null
+    pickedMood: {} as PickedMood | null
   }),
   actions: {
     setMood(picked: boolean, mood: PickedMood | null) {

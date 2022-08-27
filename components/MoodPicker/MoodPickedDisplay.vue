@@ -1,9 +1,9 @@
 <template>
   <section class="py-24">
     <div class="max-w-sm mx-auto">
-      <h1 class="font-bold text-2xl mb-8 text-center">ur mood today</h1>
+      <h1 class="font-extrabold text-2xl mb-8 text-center">ur mood today</h1>
       <div v-if="state?.moodId" class="w-full">
-        <MoodPickerItem :is-flippable="false" class="w-full" v-bind="moodPickerItemData" />
+        <MoodPickerItem :is-flippable="false" is-square class="w-full" v-bind="moodPickerItemData" />
       </div>
     </div>
   </section>

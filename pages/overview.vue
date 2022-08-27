@@ -1,17 +1,20 @@
 <template>
-  <section class="py-24 h-screen">
-    <div v-if="pickedMoods?.length" class="max-w-sm mx-auto h-full pb-16">
-      <h1 class="font-bold text-2xl mb-8 text-center">Overview</h1>
-      <LineChart class="h-full" :chart-data="chartData" :options="chartOptions" />
+  <section class='py-24 h-screen'>
+    <div v-if='pickedMoods?.length' class='max-w-sm mx-auto h-full pb-16'>
+      <BaseHeadline text='Overview' headline-type='h1' class='text-center' />
+      <LineChart class='h-full' :chart-data='chartData' :options='chartOptions' />
     </div>
-    <h1 v-else class="max-w-sm mx-auto h-full pb-16 font-bold text-2xl mb-8 text-center">No data yet, go track your mood!</h1>
+    <BaseHeadline
+      v-else
+      class='text-center'
+      text='No data yet, go track your mood!'
+      headline-type='h1' />
   </section>
 </template>
 
-<script setup lang="ts">
+<script setup lang='ts'>
 import { LineChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
-// import zoomPlugin from 'chartjs-plugin-zoom';
 
 definePageMeta({
   middleware: 'auth'
@@ -21,12 +24,14 @@ const user = useSupabaseUser()
 const { data: pickedMoods } = await usePickedMoods(user.value?.id)
 const { data: allMoods } = await useMoods('name, icon, value')
 Chart.register(...registerables)
+
 // Chart.register(...registerables, zoomPlugin);
 
 interface YAxisItem {
   icon: string
   value: number
 }
+
 const xAxisLabels: string[] = []
 const yAxisLabels: YAxisItem[] = []
 const pickedMoodsValues: number[] = []
@@ -55,7 +60,7 @@ const chartData = {
       pointRadius: 7,
       pointBorderColor: '#0C0C0F',
       pointBorderWidth: '2',
-      pointBackgroundColor: '#DCFCE7',
+      pointBackgroundColor: '#C2FFDE',
       pointHoverRadius: 7,
       pointHoverBorderColor: '#0C0C0F',
       pointHoverBorderWidth: '2',
@@ -74,6 +79,12 @@ const chartOptions = {
       display: false
     },
     tooltip: {
+      backgroundColor: 'rgba(0,0,0,1)',
+      cornerRadius: 0,
+      padding: 10,
+      displayColors: false,
+      titleFont: { family: 'Syne', size: 13 },
+      bodyFont: { family: 'Syne', size: 18 },
       callbacks: {
         label: (context) => {
           return pickedMoodsDescriptions[context.dataIndex]
@@ -83,6 +94,9 @@ const chartOptions = {
   },
   scales: {
     x: {
+      grid: {
+        borderDash: [4, 4]
+      },
       ticks: {
         font: {
           family: 'Syne',
@@ -95,14 +109,15 @@ const chartOptions = {
     },
     y: {
       grid: {
-        color: 'rgba(0,0,0,.125)'
+        color: 'rgba(0,0,0,.125)',
+        borderDash: [4, 4]
       },
       ticks: {
         stepSize: 1,
         font: {
           size: 30
         },
-        callback: function (value: number) {
+        callback: function(value: number) {
           const temp = yAxisLabels.find((tick) => tick.value === value)
           return temp?.icon
         }

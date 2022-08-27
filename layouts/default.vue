@@ -1,14 +1,14 @@
 <template>
   <div>
-    <MoodLogo />
-    <main class="bg-green-100 min-h-screen px-8">
+    <TheLogo />
+    <main class='bg-green-light min-h-screen px-8'>
       <slot />
     </main>
-    <MoodNavigation v-if="!!user" />
+    <TheNavigation v-if='!!user' />
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang='ts'>
 const user = useSupabaseUser()
 </script>
 
@@ -17,6 +17,7 @@ const user = useSupabaseUser()
 .page-leave-active {
   transition: opacity 0.5s;
 }
+
 .page-enter,
 .page-leave-active {
   opacity: 0;

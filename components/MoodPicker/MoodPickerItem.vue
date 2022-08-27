@@ -1,61 +1,48 @@
 <template>
-  <div class="mood-picker-item" :class="{ flipped: isFlipped }">
+  <div class='mood-picker-item' :class="{ flipped: isFlipped, 'square': props.isSquare }">
     <div
       :class="{
         'cursor-pointer': props.isFlippable
       }"
-      class="mood-picker-item-inner border-4 border-black rounded shadow-brutal text-center transition-transform"
+      class='mood-picker-item-inner border-4 border-black rounded shadow-brutal text-center transition-transform'
     >
-      <div class="mood-picker-item-front flex flex-col items-center justify-center" @click="flipBox()">
-        <span class="text-5xl block mb-2">{{ props.icon }}</span>
+      <div class='mood-picker-item-front flex flex-col items-center justify-center' @click='flipBox()'>
+        <span class='text-5xl block mb-2'>{{ props.icon }}</span>
         {{ props.name }}
-        <div v-if="props.description" class="italic">„{{ props.description }}“</div>
+        <div v-if='props.description' class='italic'>„{{ props.description }}“</div>
       </div>
-      <div class="mood-picker-item-back p-4 flex flex-col justify-between">
-        <div>
-          <p class="font-bold mb-2">tell me y</p>
-          <input v-model="description" class="mb-2 block bg-gray-500 text-white rounded shadow-brutal-sm w-full p-2" type="text" />
-          <button class="bg-green-500 block font-bold rounded shadow-brutal-sm w-full py-2" @click="emit('pick-mood', description)">
-            Pick mood
-          </button>
-        </div>
-        <div>
-          <button @click="flipBox()">Back</button>
-        </div>
+      <div class='mood-picker-item-back p-4 flex flex-col justify-center' @click.self='flipBox()'>
+        <p class='font-bold mb-2'>tell me y</p>
+        <BaseInput
+          v-model='description'
+          type='text'
+          :disabled='!isFlipped' />
+        <BaseButton text='Pick mood' :disabled='!isFlipped' @click="emit('pick-mood', description)" />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-// TODO refactor defineProps
-const props = defineProps({
-  icon: {
-    type: String,
-    required: false,
-    default: ''
-  },
-  name: {
-    type: String,
-    required: false,
-    default: ''
-  },
-  description: {
-    type: String,
-    required: false,
-    default: ''
-  },
-  isFlippable: {
-    type: Boolean,
-    required: false,
-    default: true
-  }
+<script setup lang='ts'>
+interface Props {
+  icon: string
+  name: string
+  description?: string
+  isFlippable?: boolean
+  isSquare?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  description: '',
+  isFlippable: true,
+  isSquare: false
 })
 
 const isFlipped = ref(false)
 const flipBox = () => {
   if (props.isFlippable) isFlipped.value = !isFlipped.value
 }
+
 const emit = defineEmits(['pick-mood'])
 const description = ref('')
 </script>
@@ -63,7 +50,7 @@ const description = ref('')
 <style>
 .mood-picker-item {
   perspective: 800px;
-  height: 300px;
+  height: 200px;
 }
 
 .mood-picker-item.flipped .mood-picker-item-inner {
@@ -90,5 +77,22 @@ const description = ref('')
 
 .mood-picker-item-back {
   transform: rotateY(180deg);
+}
+
+.square {
+  position: relative;
+  height: unset;
+}
+
+.square:after {
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
+
+.square .mood-picker-item-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 </style>

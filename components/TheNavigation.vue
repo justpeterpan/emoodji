@@ -15,7 +15,7 @@
               v-for="navItem in nav"
               :key="navItem.path"
               :class="navItem.position"
-              class="w-12 h-12 block rounded-full bg-green-500 absolute"
+              class="w-12 h-12 block rounded-full bg-green absolute"
               :to="navItem.path"
             >
               <div class="w-6 h-6 mt-3 ml-3">

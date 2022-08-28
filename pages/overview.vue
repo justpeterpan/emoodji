@@ -1,18 +1,14 @@
 <template>
-  <section class='py-24 h-screen'>
-    <div v-if='pickedMoods?.length' class='max-w-sm mx-auto h-full pb-16'>
-      <BaseHeadline text='Overview' headline-type='h1' class='text-center' />
-      <LineChart class='h-full' :chart-data='chartData' :options='chartOptions' />
+  <section class="py-24 h-screen">
+    <div v-if="pickedMoods?.length" class="max-w-sm mx-auto h-full pb-16">
+      <BaseHeadline text="Overview" headline-type="h1" class="text-center" />
+      <LineChart class="h-full" :chart-data="chartData" :options="chartOptions" />
     </div>
-    <BaseHeadline
-      v-else
-      class='text-center'
-      text='No data yet, go track your mood!'
-      headline-type='h1' />
+    <BaseHeadline v-else class="text-center" text="No data yet, go track your mood!" headline-type="h1" />
   </section>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import { LineChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
 
@@ -117,7 +113,7 @@ const chartOptions = {
         font: {
           size: 30
         },
-        callback: function(value: number) {
+        callback: function (value: number) {
           const temp = yAxisLabels.find((tick) => tick.value === value)
           return temp?.icon
         }

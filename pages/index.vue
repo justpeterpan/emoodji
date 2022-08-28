@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div v-if='!moodState.$state.hasPickedMood && !moodsPending'>
-      <MoodPicker :moods='moods' />
+    <div v-if="!moodState.$state.hasPickedMood && !moodsPending">
+      <MoodPicker :moods="moods" />
     </div>
-    <div v-if='moodState.$state.hasPickedMood'>
+    <div v-if="moodState.$state.hasPickedMood">
       <MoodPickedDisplay />
     </div>
   </div>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import { useMood } from '~/stores/moods'
 
 definePageMeta({

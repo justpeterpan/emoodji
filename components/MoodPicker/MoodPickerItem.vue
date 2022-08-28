@@ -1,29 +1,26 @@
 <template>
-  <div class='mood-picker-item' :class="{ flipped: isFlipped, 'square': props.isSquare }">
+  <div class="mood-picker-item" :class="{ flipped: isFlipped, square: props.isSquare }">
     <div
       :class="{
         'cursor-pointer': props.isFlippable
       }"
-      class='mood-picker-item-inner border-4 border-black rounded shadow-brutal text-center transition-transform'
+      class="mood-picker-item-inner border-4 border-black rounded shadow-brutal text-center transition-transform"
     >
-      <div class='mood-picker-item-front flex flex-col items-center justify-center' @click='flipBox()'>
-        <span class='text-5xl block mb-2'>{{ props.icon }}</span>
+      <div class="mood-picker-item-front flex flex-col items-center justify-center" @click="flipBox()">
+        <span class="text-5xl block mb-2">{{ props.icon }}</span>
         {{ props.name }}
-        <div v-if='props.description' class='italic'>„{{ props.description }}“</div>
+        <div v-if="props.description" class="italic">„{{ props.description }}“</div>
       </div>
-      <div class='mood-picker-item-back p-4 flex flex-col justify-center' @click.self='flipBox()'>
-        <p class='font-bold mb-2'>tell me y</p>
-        <BaseInput
-          v-model='description'
-          type='text'
-          :disabled='!isFlipped' />
-        <BaseButton text='Pick mood' :disabled='!isFlipped' @click="emit('pick-mood', description)" />
+      <div class="mood-picker-item-back p-4 flex flex-col justify-center" @click.self="flipBox()">
+        <p class="font-bold mb-2">tell me y</p>
+        <BaseInput v-model="description" type="text" :disabled="!isFlipped" />
+        <BaseButton text="Pick mood" :disabled="!isFlipped" @click="emit('pick-mood', description)" />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 interface Props {
   icon: string
   name: string

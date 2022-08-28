@@ -11,10 +11,10 @@ export default defineNuxtConfig({
         {
           hid: 'description',
           name: 'description',
-          content: 'emoodji helps you to spot when and why mood swings in your team occur.',
-        },
+          content: 'emoodji helps you to spot when and why mood swings in your team occur.'
+        }
       ],
-      link: [{ rel: 'icon', type: 'image/x-icon', href: 'favicon.png' }],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: 'favicon.png' }]
     }
   },
   css: ['@/assets/fonts/fonts.css', '@/assets/css/hamburgers.min.css'],

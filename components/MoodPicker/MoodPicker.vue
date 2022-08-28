@@ -3,7 +3,13 @@
     <div class="max-w-sm mx-auto">
       <BaseHeadline headline-type="h1" class="text-center" text="How ya doin?" />
       <div class="grid grid-cols-2 gap-8">
-        <MoodPickerItem v-for="mood of moods" :key="mood.name" v-bind="mood" @pickMood="pickMood(mood, $event)" />
+        <MoodPickerItem
+          v-for="mood of moods"
+          :key="mood.name"
+          v-bind="{ ...mood, flippedBoxName }"
+          @pickMood="pickMood(mood, $event)"
+          @flip-box="flipBox(mood, $event)"
+        />
       </div>
     </div>
   </section>
@@ -24,5 +30,10 @@ const pickMood = async (mood: Mood, description: any) => {
     description
   })
   useMood().setMood(true, { moodId: mood.id, userId: user.value?.id!, changed: 0, description, emoodji: mood })
+}
+
+const flippedBoxName = ref('')
+const flipBox = (mood: Mood, boxName: string) => {
+  if (mood.name === boxName) flippedBoxName.value = boxName
 }
 </script>

@@ -6,12 +6,12 @@
       }"
       class="mood-picker-item-inner border-4 border-black rounded shadow-brutal text-center transition-transform"
     >
-      <div class="mood-picker-item-front flex flex-col items-center justify-center" @click="flipBox()">
+      <div class="mood-picker-item-front flex flex-col items-center justify-center" @click="emit('flip-box', props.name)">
         <span class="text-5xl block mb-2">{{ props.icon }}</span>
         {{ props.name }}
         <div v-if="props.description" class="italic">„{{ props.description }}“</div>
       </div>
-      <div class="mood-picker-item-back p-4 flex flex-col justify-center" @click.self="flipBox()">
+      <div class="mood-picker-item-back p-4 flex flex-col justify-center" @click.self="emit('flip-box', props.name)">
         <p class="font-bold mb-2">tell me y</p>
         <BaseInput v-model="description" type="text" :disabled="!isFlipped" />
         <BaseButton text="Pick mood" :disabled="!isFlipped" @click="emit('pick-mood', description)" />
@@ -21,27 +21,28 @@
 </template>
 
 <script setup lang="ts">
+const emit = defineEmits(['pick-mood', 'flip-box'])
+const description = ref('')
 interface Props {
-  icon: string
-  name: string
+  icon: string | undefined
+  name: string | undefined
   description?: string
   isFlippable?: boolean
   isSquare?: boolean
+  flippedBoxName: string | undefined
 }
 
 const props = withDefaults(defineProps<Props>(), {
   description: '',
   isFlippable: true,
-  isSquare: false
+  isSquare: false,
+  flippedBoxName: ''
 })
 
-const isFlipped = ref(false)
-const flipBox = () => {
-  if (props.isFlippable) isFlipped.value = !isFlipped.value
-}
-
-const emit = defineEmits(['pick-mood'])
-const description = ref('')
+const isFlipped = computed(() => {
+  if (props.name === props.flippedBoxName) return true
+  return false
+})
 </script>
 
 <style>

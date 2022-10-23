@@ -19,9 +19,9 @@
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nuxt": "3.0.0-rc.9",
-    "prettier": "^2.7.1",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "nuxt": "3.0.0-rc.12",
+    "prettier": "^2.7.1"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.0",

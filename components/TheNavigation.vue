@@ -27,7 +27,6 @@ const nav = [
               v-for="navItem in nav"
               :key="navItem.path"
               :class="navItem.position"
-              class="w-12 h-12 block rounded-full bg-green absolute"
               :to="navItem.path"
             >
             {{ navItem.name }}

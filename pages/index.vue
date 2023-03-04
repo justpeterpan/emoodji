@@ -38,7 +38,7 @@ const showPickedMood = computed(() => {
 
 <template>
   <div>
-    <MoodTheMoodPicker :moods="moods" v-if="showMoodPicker" />
-    <MoodThePickedMood v-if="showPickedMood" />
+    <MoodPicker :moods="moods" v-if="showMoodPicker" />
+    <MoodPicked v-if="showPickedMood" />
   </div>
 </template>

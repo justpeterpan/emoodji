@@ -19,5 +19,7 @@
 </script>
 
 <template>
-  <button @click="login">Login with github</button>
+  <div class="pt-10">
+    <button @click="login">Login with github</button>
+  </div>
 </template>

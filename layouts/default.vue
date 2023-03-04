@@ -1,10 +1,14 @@
+<script setup lang="ts">
+const user = useSupabaseUser()
+</script>
+
 <template>
   <div>
     <TheLogo />
     <main class="bg-green-light min-h-screen px-8">
       <slot />
     </main>
-    <TheNavigation />
+    <TheNavigation v-if="!!user" />
   </div>
 </template>
 

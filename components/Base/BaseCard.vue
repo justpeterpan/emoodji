@@ -1,10 +1,11 @@
 <script setup lang="ts">
   const emit = defineEmits(['flip-card'])
   const props = withDefaults(defineProps<{
-    cardName: string | undefined
-    flippedCardName: string | undefined
+    cardName?: string 
+    flippedCardName?: string
     isFlippable?: boolean
   }>(), {
+    cardName: '',
     flippedCardName: '',
     isFlippable: true
   })

@@ -5,6 +5,7 @@ definePageMeta({
 
 const client = useSupabaseClient()
 const user = useSupabaseUser()
+
 const { data: moods, pending: pendingMoods } = await useAsyncData('moods', async () => {
   const { data } = await client.from('emoodji').select('name, icon, id')
   return data
@@ -18,6 +19,7 @@ const { data: latestMood, pending: pendingLatestMood } = await useAsyncData('lat
         .limit(1)
   return data?.[0] 
 })
+
 const today = new Date().toISOString().slice(0, 10)
 const todaysMood = useState('currentMood', () => {
   if (today === latestMood.value?.created_at?.slice(0, 10)) {
@@ -26,15 +28,17 @@ const todaysMood = useState('currentMood', () => {
   return null
 })
 const clientMood = useState('clientMood')
+const showMoodPicker = computed(() => {
+  return !todaysMood.value?.moodId && !clientMood.value?.moodId
+})
+const showPickedMood = computed(() => {
+  return todaysMood.value?.moodId || clientMood.value?.moodId
+})
 </script>
 
 <template>
   <div>
-    <pre>
-      {{ useState('currentMood') }}
-      {{ useState('clientMood') }}
-    </pre>
-    <MoodTheMoodPicker :moods="moods" v-if="!pendingMoods && !pendingLatestMood && !todaysMood?.moodId && !clientMood?.moodId" />
-    <MoodThePickedMood v-if="!pendingMoods && !pendingLatestMood && (todaysMood?.moodId || clientMood?.moodId)" />
+    <MoodTheMoodPicker :moods="moods" v-if="showMoodPicker" />
+    <MoodThePickedMood v-if="showPickedMood" />
   </div>
 </template>

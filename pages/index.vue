@@ -16,24 +16,25 @@ const { data: latestMood, pending: pendingLatestMood } = await useAsyncData('lat
         .eq('userId', user.value?.id)
         .order('created_at', { ascending: false })
         .limit(1)
-  return data
+  return data?.[0] 
 })
 const today = new Date().toISOString().slice(0, 10)
-const todaysMood = latestMood.value?.find(mood => mood.created_at)
-const hasMoodPicked = useState('hasMoodPicked', () => {
-  if (today === todaysMood?.created_at?.slice(0, 10)) {
-    useState('todaysPickedMood', () => todaysMood)
-    return true
+const todaysMood = useState('currentMood', () => {
+  if (today === latestMood.value?.created_at?.slice(0, 10)) {
+    return latestMood.value
   }
-  return false
+  return null
 })
-
-console.log(useState('todaysPickedMood').value)
+const clientMood = useState('clientMood')
 </script>
 
 <template>
   <div>
-    <MoodTheMoodPicker :moods="moods" v-if="!pendingMoods && !pendingLatestMood && !hasMoodPicked"/>
-    <MoodThePickedMood v-if="!pendingMoods && !pendingLatestMood && hasMoodPicked" />
+    <pre>
+      {{ useState('currentMood') }}
+      {{ useState('clientMood') }}
+    </pre>
+    <MoodTheMoodPicker :moods="moods" v-if="!pendingMoods && !pendingLatestMood && !todaysMood?.moodId && !clientMood?.moodId" />
+    <MoodThePickedMood v-if="!pendingMoods && !pendingLatestMood && (todaysMood?.moodId || clientMood?.moodId)" />
   </div>
 </template>

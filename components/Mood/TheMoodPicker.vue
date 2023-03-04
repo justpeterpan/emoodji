@@ -7,10 +7,19 @@
     description?: string
   }>()
   const flippedCardName = ref('')
-  const setMood = async (moodId: string) => {
+  const setMood = async (mood: Record<string, string>) => {
     await client
       .from('pickedMood')
-      .insert({ moodId, userId: user.value?.id, description: description.value })
+      .insert({ moodId: mood.id, userId: user.value?.id, description: description.value })
+    
+    useState('clientMood', () => {
+      return { 
+        created_at: new Date().toISOString(), 
+        description: description.value, 
+        moodId: mood.id, 
+        emoodji: mood
+      }
+    })
   }
 
   function flipCard (mood: any, boxName: string) {
@@ -35,7 +44,7 @@
             <template #back>
               <p class="font-bold mb-2">tell me y</p>
               <BaseInput v-model="description" type="text" :disabled="flippedCardName !== mood.name" />
-              <BaseButton text="Pick mood" @click="setMood(mood.id)" />
+              <BaseButton text="Pick mood" @click="setMood(mood)" />
             </template>
           </BaseCard> 
         </div>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const state = useState('todaysPickedMood').value
-const moodPickerItemData = { name: state?.emoodji.name, icon: state?.emoodji.icon, description: state?.description }
+  const state = useState('currentMood').value?.moodId ? useState('currentMood').value : useState('clientMood').value
 </script>
 
 <template>
@@ -11,9 +10,9 @@ const moodPickerItemData = { name: state?.emoodji.name, icon: state?.emoodji.ico
         <BaseCard :is-flippable="false">
           <template #front>
             <div class="flex flex-col items-center justify-center">
-              <span class="text-5xl block mb-2">{{ moodPickerItemData.icon }}</span>
-              {{ moodPickerItemData.name }}
-              <div v-if="moodPickerItemData.description" class="italic">„{{ moodPickerItemData.description }}“</div>
+              <span class="text-5xl block mb-2">{{ state.emoodji.icon }}</span>
+              {{ state.emoodji.name }}
+              <div v-if="state.description" class="italic">„{{ state.description }}“</div>
             </div>
           </template>
         </BaseCard>

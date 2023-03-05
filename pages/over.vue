@@ -43,7 +43,7 @@ if (pickedMoods.value?.length) {
     const dateFormatted = date.toLocaleDateString('en-GB', { month: 'numeric', day: 'numeric' })
     xAxisLabels.push(dateFormatted)
     pickedMoodsValues.push(mood.emoodji.value)
-    pickedMoodsDescriptions.push(mood.description)
+    pickedMoodsDescriptions.push(mood?.description || '')
   })
 }
 
@@ -67,6 +67,37 @@ const chartData = {
   ]
 }
 
+const getOrCreateTooltip = (chart: any) => {
+  let tooltipEl = chart.canvas.parentNode.querySelector('div')
+  if (!tooltipEl) {
+    tooltipEl = document.createElement('DIV')
+    const tooltipTitle = document.createElement('P')
+    tooltipTitle.innerText = 'Title'
+    tooltipEl.append(tooltipTitle)
+    tooltipEl.classList.add('tooltip')
+    chart.canvas.parentNode.appendChild(tooltipEl)
+  }
+  return tooltipEl
+}
+const externalTooltipHandler = (context: any) => {
+  const { chart, tooltip } = context
+  const tooltipEl = getOrCreateTooltip(chart)
+  tooltipEl.style.left = tooltip.x + 50 + 'px'
+  tooltipEl.style.top = tooltip.y + 50 + 'px'
+  tooltip.opacity === 0 ? (tooltipEl.style.opacity = 0) : (tooltipEl.style.opacity = 1)
+  const tooltipTitle = tooltipEl.querySelector('p')
+  tooltipTitle.innerText = tooltip.title
+  tooltipEl.innerHTML = ''
+  tooltipEl.append(tooltipTitle)
+  tooltip.dataPoints.forEach((dataPoint: any) => {
+    const dataPointIndex = dataPoint.dataIndex
+    const moodDescription = document.createElement('P')
+    moodDescription.innerText = pickedMoodsDescriptions[dataPointIndex]
+    moodDescription.style.color = 'white'
+    tooltipEl.append(moodDescription)
+  })
+}
+
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
@@ -75,17 +106,8 @@ const chartOptions = {
       display: false
     },
     tooltip: {
-      backgroundColor: 'rgba(0,0,0,1)',
-      cornerRadius: 0,
-      padding: 10,
-      displayColors: false,
-      titleFont: { family: 'Syne', size: 13 },
-      bodyFont: { family: 'Syne', size: 18 },
-      callbacks: {
-        label: (context) => {
-          return pickedMoodsDescriptions[context.dataIndex]
-        }
-      }
+      enabled: false,
+      external: externalTooltipHandler
     }
   },
   scales: {
@@ -125,10 +147,22 @@ const chartOptions = {
 
 <template>
   <section class="py-24 h-screen">
-    <div v-if="pickedMoods?.length" class="max-w-sm mx-auto h-full pb-16">
+    <div v-if="pickedMoods?.length" class="sm:max-w-sm md:max-w-7xl mx-auto h-full pb-16">
       <BaseHeadline text="Overview" headline-type="h1" class="text-center" />
       <Line class="h-full" :data="chartData" :options="chartOptions" />
     </div>
     <BaseHeadline v-else class="text-center" text="No data yet, go track your mood!" headline-type="h1" />
   </section>
 </template>
+
+<style>
+.tooltip {
+  background: rgba(0, 0, 0, 1);
+  padding: 0.5em;
+  position: absolute;
+  transform: translate(-50%, 0);
+}
+.tooltip p {
+  color: white;
+}
+</style>

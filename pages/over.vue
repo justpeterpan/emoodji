@@ -18,6 +18,28 @@ const { data: pickedMoods } = await useAsyncData('pickedMoods', async () => {
 
   return data
 })
+const { data: teamMembers } = await useAsyncData('teamMembers', async () => {
+  const { data } = await client.from('teamMember').select('memberId').eq('teamId', useRuntimeConfig().teamId)
+  return data
+})
+
+const memberIds = teamMembers.value?.filter((member) => member.memberId !== user.value?.id).map((member) => member.memberId)
+
+const { data: teamData } = await useAsyncData('teamData', async () => {
+  const { data } = await client
+    .from('pickedMood')
+    .select(`id, userId, moodId, created_at, changed, description, emoodji(*)`)
+    .in('userId', memberIds)
+    .order('userId', { ascending: true })
+  const groupedData = data?.reduce((acc, item) => {
+    if (!acc[item.userId]) {
+      acc[item.userId] = []
+    }
+    acc[item.userId].push(item)
+    return acc
+  }, {})
+  return groupedData
+})
 
 const { data: allMoods } = await useAsyncData('moods', async () => {
   const { data } = await client.from('emoodji').select('name, icon, id, value')
@@ -47,6 +69,26 @@ if (pickedMoods.value?.length) {
   })
 }
 
+const lineData = memberIds?.map((id) => {
+  const memberData = teamData.value[id]
+  const memberMoods = memberData.map((mood) => mood.emoodji.value)
+  return {
+    data: memberMoods,
+    pointStyle: 'circle',
+    pointRadius: 7,
+    pointBorderColor: '#0C0C0F',
+    pointBorderWidth: '2',
+    pointBackgroundColor: '#C2FFDE',
+    pointHoverRadius: 7,
+    pointHoverBorderColor: '#0C0C0F',
+    pointHoverBorderWidth: '2',
+    pointHoverBackgroundColor: '#FF6197',
+    borderColor: '#FF6384',
+    borderWidth: '2',
+    cubicInterpolationMode: 'monotone'
+  }
+})
+
 const chartData = {
   labels: xAxisLabels,
   datasets: [
@@ -62,8 +104,10 @@ const chartData = {
       pointHoverBorderWidth: '2',
       pointHoverBackgroundColor: '#FF6197',
       borderColor: '#0C0C0F',
-      borderWidth: '2'
-    }
+      borderWidth: '2',
+      cubicInterpolationMode: 'monotone'
+    },
+    lineData?.[1]
   ]
 }
 

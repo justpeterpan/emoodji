@@ -8,8 +8,6 @@ const props = defineProps<{
 }>()
 const flippedCardName = ref('')
 const setMood = async (mood: Record<string, string>) => {
-  await client.from('pickedMood').insert({ moodId: mood.id, userId: user.value?.id, description: description.value })
-
   useState('clientMood', () => {
     return {
       created_at: new Date().toISOString(),
@@ -18,6 +16,8 @@ const setMood = async (mood: Record<string, string>) => {
       emoodji: mood
     }
   })
+
+  await client.from('pickedMood').insert({ moodId: mood.id, userId: user.value?.id, description: description.value })
 }
 
 function flipCard(mood: any, boxName: string) {

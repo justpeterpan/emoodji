@@ -6,18 +6,18 @@ definePageMeta({
 const client = useSupabaseClient()
 const user = useSupabaseUser()
 
-const { data: moods, pending: pendingMoods } = await useAsyncData('moods', async () => {
+const { data: moods } = await useAsyncData('moods', async () => {
   const { data } = await client.from('emoodji').select('name, icon, id')
   return data
 })
-const { data: latestMood, pending: pendingLatestMood } = await useAsyncData('latestMood', async () => {
+const { data: latestMood } = await useAsyncData('latestMood', async () => {
   const { data } = await client
-        .from('pickedMood')
-        .select(`created_at, description, moodId, emoodji(*)`)
-        .eq('userId', user.value?.id)
-        .order('created_at', { ascending: false })
-        .limit(1)
-  return data?.[0] 
+    .from('pickedMood')
+    .select(`created_at, description, moodId, emoodji(*)`)
+    .eq('userId', user.value?.id)
+    .order('created_at', { ascending: false })
+    .limit(1)
+  return data?.[0]
 })
 
 const today = new Date().toISOString().slice(0, 10)
@@ -38,7 +38,7 @@ const showPickedMood = computed(() => {
 
 <template>
   <div>
-    <MoodPicker :moods="moods" v-if="showMoodPicker" />
+    <MoodPicker v-if="showMoodPicker" :moods="moods" />
     <MoodPicked v-if="showPickedMood" />
   </div>
 </template>

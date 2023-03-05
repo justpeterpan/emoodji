@@ -5,13 +5,19 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore ."
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config": "12.0.0",
+    "@nuxtjs/eslint-config-typescript": "12.0.0",
     "@nuxtjs/supabase": "^0.3.1",
     "@nuxtjs/tailwindcss": "6.4.1",
     "@vueuse/core": "^9.13.0",
     "@vueuse/nuxt": "^9.13.0",
+    "eslint": "8.35.0",
+    "eslint-config-prettier": "8.6.0",
+    "eslint-plugin-prettier": "4.2.1",
     "nuxt": "^3.2.3"
   },
   "dependencies": {

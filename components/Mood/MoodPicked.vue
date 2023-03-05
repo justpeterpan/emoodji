@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const state = useState('currentMood').value?.moodId ? useState('currentMood').value : useState('clientMood').value
+const state = useState('currentMood').value?.moodId ? useState('currentMood').value : useState('clientMood').value
 </script>
 
 <template>

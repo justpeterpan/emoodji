@@ -1,18 +1,21 @@
 <script setup lang="ts">
-  const emit = defineEmits(['flip-card'])
-  const props = withDefaults(defineProps<{
-    cardName?: string 
+const emit = defineEmits(['flip-card'])
+const props = withDefaults(
+  defineProps<{
+    cardName?: string
     flippedCardName?: string
     isFlippable?: boolean
-  }>(), {
+  }>(),
+  {
     cardName: '',
     flippedCardName: '',
     isFlippable: true
-  })
-  const isFlipped = computed(() => {
-    if (props.isFlippable && props.cardName === props.flippedCardName) return true
-    return false
-  }) 
+  }
+)
+const isFlipped = computed(() => {
+  if (props.isFlippable && props.cardName === props.flippedCardName) return true
+  return false
+})
 </script>
 
 <template>
@@ -23,10 +26,10 @@
       }"
       class="mood-picker-item-inner border-4 border-black rounded shadow-brutal text-center transition-transform"
     >
-      <div @click="emit('flip-card', props.cardName)" class="mood-picker-item-front flex flex-col items-center justify-center">
+      <div class="mood-picker-item-front flex flex-col items-center justify-center" @click="emit('flip-card', props.cardName)">
         <slot name="front" />
       </div>
-      <div @click="emit('flip-card', props.cardName)" class="mood-picker-item-back p-4 flex flex-col justify-center">
+      <div class="mood-picker-item-back p-4 flex flex-col justify-center" @click="emit('flip-card', props.cardName)">
         <slot name="back" />
       </div>
     </div>

@@ -1,0 +1,8 @@
+{
+  "plugins": ["prettier"],
+  "extends": ["@nuxtjs/eslint-config-typescript", "plugin:prettier/recommended"],
+  "rules": {
+    "no-console": ["error", {"allow": ["warn", "error"]}]
+  }
+}
+

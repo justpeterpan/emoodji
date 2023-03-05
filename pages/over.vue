@@ -2,30 +2,28 @@
 import { Line } from 'vue-chartjs'
 import { Chart, registerables } from 'chart.js'
 
-  definePageMeta({
-    middleware: 'auth'
-  })
+definePageMeta({
+  middleware: 'auth'
+})
 
-  Chart.register(...registerables)
-  const user = useSupabaseUser()
-  const client = useSupabaseClient()
-  const { data: pickedMoods, pending } = await useAsyncData('pickedMoods',
-    async() => {
-      const { data } =  await client
-        .from('pickedMood')
-        .select(`id, moodId, created_at, changed, description, emoodji(*)`)
-        .eq('userId', user.value?.id)
-        .order('created_at')
+Chart.register(...registerables)
+const user = useSupabaseUser()
+const client = useSupabaseClient()
+const { data: pickedMoods } = await useAsyncData('pickedMoods', async () => {
+  const { data } = await client
+    .from('pickedMood')
+    .select(`id, moodId, created_at, changed, description, emoodji(*)`)
+    .eq('userId', user.value?.id)
+    .order('created_at')
 
-      return  data
-    }
-  )
-  
-  const { data: allMoods, pending: pendingMoods } = await useAsyncData('moods', async () => {
-    const { data } = await client.from('emoodji').select('name, icon, id, value')
-    return data
-  })
-  interface YAxisItem {
+  return data
+})
+
+const { data: allMoods } = await useAsyncData('moods', async () => {
+  const { data } = await client.from('emoodji').select('name, icon, id, value')
+  return data
+})
+interface YAxisItem {
   icon: string
   value: number
 }

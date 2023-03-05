@@ -1,15 +1,13 @@
 <script setup lang="ts">
-  const { auth } = useSupabaseClient()
-  async function logout() {
-    const { error } = await auth.signOut()
-    if (error) {
-      console.log('Error logging out', error)
-    }
-    await navigateTo('/login')
+const { auth } = useSupabaseClient()
+async function logout() {
+  const { error } = await auth.signOut()
+  if (error) {
+    console.error('Error logging out', error)
   }
-  await logout()
+  await navigateTo('/login')
+}
+await logout()
 </script>
 
-<template>
-  Logging out...
-</template>
+<template><div>Logging out...</div></template>

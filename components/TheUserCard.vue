@@ -5,8 +5,8 @@ const avatar = computed(() => user.value?.user_metadata.avatar_url)
 </script>
 
 <template>
-    <div v-if="user">
-      <img :src="avatar" :alt="name" />
-      <p>{{ name }}</p>
-    </div>
+  <div v-if="user">
+    <img :src="avatar" :alt="name" />
+    <p>{{ name }}</p>
+  </div>
 </template>

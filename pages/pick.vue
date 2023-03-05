@@ -12,9 +12,7 @@ const { data: moods, pending } = await useAsyncData('moods', async () => {
 
 <template>
   <div>
-    <div v-if="pending">
-      loading
-    </div>
+    <div v-if="pending">loading</div>
     <ul v-else>
       <li v-for="mood in moods" :key="mood.id">
         <span>{{ mood.name }}</span>

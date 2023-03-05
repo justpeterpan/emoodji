@@ -1,7 +1,3 @@
-<template>
-  <input class="mb-2 block bg-gray text-white rounded shadow-brutal-sm w-full p-2" :value="modelValue" :type="type" @input="updateValue" />
-</template>
-
 <script setup lang="ts">
 defineProps<{
   modelValue: string
@@ -14,3 +10,7 @@ const updateValue = (event: any) => {
   emit('update:modelValue', event.target.value)
 }
 </script>
+
+<template>
+  <input class="mb-2 block bg-gray text-white rounded shadow-brutal-sm w-full p-2" :value="modelValue" :type="type" @input="updateValue" />
+</template>

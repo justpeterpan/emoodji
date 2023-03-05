@@ -1,15 +1,3 @@
-<template>
-  <component
-    :is="headlineType"
-    class="font-extrabold mb-8"
-    :class="{
-      'text-5xl': headlineType === 'h1' && isHuge,
-      'text-3xl': headlineType === 'h2'
-    }"
-    >{{ text }}
-  </component>
-</template>
-
 <script setup lang="ts">
 withDefaults(
   defineProps<{
@@ -22,3 +10,15 @@ withDefaults(
   }
 )
 </script>
+
+<template>
+  <component
+    :is="headlineType"
+    class="font-extrabold mb-8"
+    :class="{
+      'text-5xl': headlineType === 'h1' && isHuge,
+      'text-3xl': headlineType === 'h2'
+    }"
+    >{{ text }}
+  </component>
+</template>

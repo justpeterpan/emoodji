@@ -17,4 +17,7 @@ export default defineNuxtConfig({
   },
   css: ['@/assets/fonts/fonts.css', '@/assets/css/hamburgers.min.css'],
   modules: ['@nuxtjs/supabase', '@vueuse/nuxt', '@nuxtjs/tailwindcss'],
+  build: {
+    transpile: ['chart.js']
+  }
 })

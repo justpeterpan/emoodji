@@ -14,10 +14,11 @@ withDefaults(
 <template>
   <component
     :is="headlineType"
-    class="font-extrabold mb-8"
+    class="mb-8"
     :class="{
-      'text-5xl': headlineType === 'h1' && isHuge,
-      'text-3xl': headlineType === 'h2'
+      'text-5xl font-extrabold': headlineType === 'h1' && isHuge,
+      'text-3xl font-extrabold': headlineType === 'h2',
+      'text-2xl font-bold': headlineType === 'h3'
     }"
     >{{ text }}
   </component>

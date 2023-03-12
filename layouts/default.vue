@@ -4,10 +4,11 @@ const user = useSupabaseUser()
 
 <template>
   <div>
-    <TheLogo />
-    <main class="bg-green-light min-h-screen px-8">
+    <TheHeader />
+    <main class="bg-green-light min-h-screen">
       <slot />
     </main>
+    <TheFooter />
     <TheNavigation v-if="!!user" />
   </div>
 </template>

@@ -12,6 +12,9 @@ export default defineNuxtConfig({
           content: 'emoodji helps you to spot when and why mood swings in your team occur.'
         }
       ],
+      htmlAttrs: {
+        class: 'scroll-smooth'
+      },
       link: [{ rel: 'icon', type: 'image/x-icon', href: 'favicon.png' }]
     }
   },

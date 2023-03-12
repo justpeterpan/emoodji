@@ -1,5 +1,11 @@
 <template>
-  <header class="fixed w-full text-center py-2">
-    <NuxtLink to="/"><p class="font-bold">emoodji</p></NuxtLink>
-  </header>
+  <NuxtLink :to="logoPath"><p class="font-bold">emoodji</p></NuxtLink>
 </template>
+
+<script setup lang="ts">
+const user = useSupabaseUser()
+
+const logoPath = computed(() => {
+  return user.value ? '/' : '/splash'
+})
+</script>

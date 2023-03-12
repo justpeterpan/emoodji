@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang='ts'>
 const emit = defineEmits(['flip-card'])
 const props = withDefaults(
   defineProps<{
@@ -19,18 +19,26 @@ const isFlipped = computed(() => {
 </script>
 
 <template>
-  <div class="mood-picker-item" :class="{ flipped: isFlipped }">
+  <div class='mood-picker-item' :class='{ flipped: isFlipped }'>
     <div
+      class='bg-white mood-picker-item-inner border-4 border-black rounded shadow-brutal text-center transition-transform'
       :class="{
-        'cursor-pointer': isFlippable
+        'absolute cursor-pointer': isFlippable
       }"
-      class="mood-picker-item-inner border-4 border-black rounded shadow-brutal text-center transition-transform"
     >
-      <div class="mood-picker-item-front flex flex-col items-center justify-center" @click="emit('flip-card', props.cardName)">
-        <slot name="front" />
+      <div class='mood-picker-item-front flex flex-col items-center justify-center p-12'
+           @click="emit('flip-card', props.cardName)">
+        <slot name='front' />
       </div>
-      <div class="mood-picker-item-back p-4 flex flex-col justify-center" @click="emit('flip-card', props.cardName)">
-        <slot name="back" />
+      <div
+        v-if='isFlippable'
+        :class="{
+          'absolute top-0': isFlippable
+        }"
+        class='mood-picker-item-back p-4 flex flex-col justify-center'
+        @click="emit('flip-card', props.cardName)"
+      >
+        <slot name='back' />
       </div>
     </div>
   </div>
@@ -39,7 +47,7 @@ const isFlipped = computed(() => {
 <style>
 .mood-picker-item {
   perspective: 800px;
-  height: 200px;
+//height: 200px;
 }
 
 .mood-picker-item.flipped .mood-picker-item-inner {
@@ -57,11 +65,7 @@ const isFlipped = computed(() => {
 .mood-picker-item-front,
 .mood-picker-item-back {
   background: #fff;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
-  backface-visibility: hidden;
+//position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; /* Safari */ backface-visibility: hidden;
 }
 
 .mood-picker-item-back {
@@ -80,8 +84,6 @@ const isFlipped = computed(() => {
 }
 
 .square .mood-picker-item-inner {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+//position: absolute; width: 100%; height: 100%;
 }
 </style>

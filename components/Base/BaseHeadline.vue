@@ -16,8 +16,8 @@ withDefaults(
     :is="headlineType"
     class="mb-8"
     :class="{
-      'text-5xl font-extrabold': headlineType === 'h1' && isHuge,
-      'text-3xl font-extrabold': headlineType === 'h2',
+      'text-6xl font-extrabold ': headlineType === 'h1' && isHuge,
+      'text-4xl font-extrabold': headlineType === 'h2',
       'text-2xl font-bold': headlineType === 'h3'
     }"
     >{{ text }}

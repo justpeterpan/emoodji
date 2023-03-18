@@ -2,7 +2,7 @@
   <main>
     <section id="start" class="flex min-h-screen">
       <div class="bg-white w-1/2 flex justify-center flex-col p-16">
-        <h1 class="text-6xl font-extrabold mb-12">Start tracking your mood</h1>
+        <BaseHeadline text="Start tracking your mood" headline-type="h1" is-huge class="mb-12" />
         <div class="flex flex-col-reverse gap-8 xl:flex-row xl:gap-24 items-start">
           <div class="xl:w-1/2">
             <BaseButton class="w-full" text="Learn more" @click="goToSection('#features')" />
@@ -21,7 +21,7 @@
     <section id="features" class="py-12 flex min-h-screen items-center">
       <div class="container mx-auto">
         <div class="w-1/2">
-          <h2 class="text-4xl font-extrabold mb-24">Amazing features</h2>
+          <BaseHeadline text="Amazing features" headline-type="h2" />
         </div>
         <div class="flex flex-col md:flex-row gap-16">
           <BaseCard :is-flippable="false" class="md:w-1/3">

@@ -26,7 +26,7 @@
         <div class="flex flex-col md:flex-row gap-16">
           <BaseCard :is-flippable="false" class="md:w-1/3">
             <template #front>
-              <div class="p-12 text-left">
+              <div class="text-left">
                 <BaseIcon icon="select" class="mb-12" />
                 <BaseHeadline headline-type="h3" text="Choose your mood" />
                 <p class="text-lg">emoodji helps you to spot when and why mood swings in your team occur.</p>
@@ -35,7 +35,7 @@
           </BaseCard>
           <BaseCard :is-flippable="false" class="md:w-1/3">
             <template #front>
-              <div class="p-12 text-left">
+              <div class="text-left">
                 <BaseIcon icon="graph" class="mb-12" />
                 <BaseHeadline headline-type="h3" text="Keep track" />
                 <p class="text-lg">emoodji helps you to spot when and why mood swings in your team occur.</p>
@@ -44,7 +44,7 @@
           </BaseCard>
           <BaseCard :is-flippable="false" class="md:w-1/3">
             <template #front>
-              <div class="p-12 text-left">
+              <div class="text-left">
                 <BaseIcon icon="teams" class="mb-12" />
                 <BaseHeadline headline-type="h3" text="emoodji for teams" />
                 <p class="text-lg">emoodji helps you to spot when and why mood swings in your team occur.</p>
@@ -54,9 +54,9 @@
         </div>
       </div>
     </section>
-    <section id="cta" class="bg-white py-12">
-      <div class="container mx-auto text-center flex min-h-screen items-center">
-        <div class="w-1/2 mx-auto flex flex-col items-center">
+    <section id="cta" class="bg-white py-48">
+      <div class="container mx-auto text-center flex items-center">
+        <div class="lg:w-1/2 mx-auto flex flex-col items-center">
           <BaseHeadline headline-type="h2" text="Watcha waitin for" />
           <p class="mb-8">emoodji helps you to spot when and why mood swings in your team occur.</p>
           <BaseButton text="Sign up for free" />

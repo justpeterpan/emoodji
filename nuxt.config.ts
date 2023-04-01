@@ -19,10 +19,5 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/supabase', '@vueuse/nuxt', '@nuxtjs/tailwindcss'],
   build: {
     transpile: ['chart.js']
-  },
-  runtimeConfig: {
-    public: {
-      teamId: process.env.TEAM_ID
-    }
   }
 })

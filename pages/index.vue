@@ -6,25 +6,6 @@ definePageMeta({
 const client = useSupabaseClient()
 const user = useSupabaseUser()
 
-const { data: isTeamMember } = await useAsyncData('teamMember', async () => {
-  const { data } = await client.from('teamMember').select('memberId').eq('memberId', user.value?.id)
-  return !!data?.[0]?.memberId
-})
-
-async function addUserToTeam() {
-  if (!isTeamMember.value) {
-    const { data, error } = await client.from('teamMember').insert([{ memberId: user.value?.id, teamId: process.env.TEAM_ID }])
-    if (error) {
-      console.error('Error adding user to team', error)
-    }
-    if (data) {
-      console.info('User added to team', data)
-    }
-  }
-  useState('teamId', () => useRuntimeConfig().teamId)
-  console.info('User is already a team member')
-}
-
 const { data: moods } = await useAsyncData('moods', async () => {
   const { data } = await client.from('emoodji').select('name, icon, id')
   return data
@@ -37,10 +18,6 @@ const { data: latestMood } = await useAsyncData('latestMood', async () => {
     .order('created_at', { ascending: false })
     .limit(1)
   return data?.[0]
-})
-
-onMounted(async () => {
-  await addUserToTeam()
 })
 
 const today = new Date().toISOString().slice(0, 10)

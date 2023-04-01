@@ -14,7 +14,7 @@
       </div>
       <div class="w-1/2">
         <div class="flex items-center justify-center h-full">
-          <img src="images/illu-hero.svg" alt="" />
+          <img src="/images/illu-hero.svg" alt="" />
         </div>
       </div>
     </section>

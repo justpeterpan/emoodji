@@ -19,7 +19,20 @@ export default defineNuxtConfig({
     }
   },
   css: ['@/assets/fonts/fonts.css', '@/assets/css/hamburgers.min.css'],
-  modules: ['@nuxtjs/supabase', '@vueuse/nuxt', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/supabase', '@vueuse/nuxt', '@nuxtjs/tailwindcss', '@vite-pwa/nuxt'],
+  pwa: {
+    manifest: {
+      name: 'emoodji',
+      description: 'start tracking your mood'
+    },
+    workbox: {
+      navigateFallback: '/'
+    },
+    devOptions: {
+      enabled: true,
+      type: 'module'
+    }
+  },
   build: {
     transpile: ['chart.js']
   }

@@ -12,17 +12,59 @@ const client = useSupabaseClient()
 const { data: pickedMoods } = await useAsyncData('pickedMoods', async () => {
   const { data } = await client
     .from('pickedMood')
-    .select(`id, moodId, created_at, changed, description, emoodji(*)`)
-    .eq('userId', user.value?.id)
+    .select(`id, moodId, userId, created_at, changed, description, emoodji(*)`)
+    // .eq('userId', user.value?.id)
     .order('created_at')
 
   return data
 })
 
+function processData(data: any[]): any {
+  // Group data entries by user_id and created_at
+  const entriesByUserAndDate: Record<number, Record<string, any[]>> = {};
+  data.forEach((entry) => {
+    const { userId, created_at } = entry;
+    const date = created_at.slice(0, 10);
+    if (!entriesByUserAndDate[userId]) {
+      entriesByUserAndDate[userId] = {};
+    }
+    if (!entriesByUserAndDate[userId][date]) {
+      entriesByUserAndDate[userId][date] = [];
+    }
+    entriesByUserAndDate[userId][date].push(entry);
+  });
+
+  // Get all unique dates from the entries
+  const allDates = new Set(data.map((entry) => entry.created_at.slice(0, 10)));
+
+  // Create a dataset for each user
+  const datasets = Object.entries(entriesByUserAndDate).map(([userId, userEntries]) => {
+    const data = Array.from(allDates).map((date) => {
+      const entries = userEntries[date] || [];
+      return entries.length > 0 ? entries[0].emoodji?.value ?? null : null;
+    });
+
+    return {
+      label: `User ${userId}`,
+      data,
+      pointStyle: 'circle',
+      pointRadius: 7,
+      pointBorderColor: '#0C0C0F',
+      fill: false
+    };
+  });
+
+  return {
+    labels: Array.from(allDates),
+    datasets
+  };
+}
+
 const { data: allMoods } = await useAsyncData('moods', async () => {
   const { data } = await client.from('emoodji').select('name, icon, id, value')
   return data
 })
+
 interface YAxisItem {
   icon: string
   value: number
@@ -37,34 +79,35 @@ allMoods?.value?.forEach((mood) => {
   yAxisLabels.push({ icon: mood.icon, value: mood.value })
 })
 
-if (pickedMoods.value?.length) {
-  pickedMoods.value.forEach((mood) => {
-    const date = new Date(mood.created_at!)
-    const dateFormatted = date.toLocaleDateString('en-GB', { month: 'numeric', day: 'numeric' })
-    xAxisLabels.push(dateFormatted)
-    pickedMoodsValues.push(mood.emoodji.value)
-    pickedMoodsDescriptions.push(mood?.description || '')
-  })
-}
+// if (pickedMoods.value?.length) {
+//   pickedMoods.value.forEach((mood) => {
+//     const date = new Date(mood.created_at!)
+//     const dateFormatted = date.toLocaleDateString('en-GB', { month: 'numeric', day: 'numeric' })
+//     xAxisLabels.push(dateFormatted)
+//     pickedMoodsValues.push(mood.emoodji.value)
+//     pickedMoodsDescriptions.push(mood?.description || '')
+//   })
+// }
 
 const chartData = {
-  labels: xAxisLabels,
-  datasets: [
-    {
-      data: pickedMoodsValues,
-      pointStyle: 'circle',
-      pointRadius: 7,
-      pointBorderColor: '#0C0C0F',
-      pointBorderWidth: '2',
-      pointBackgroundColor: '#C2FFDE',
-      pointHoverRadius: 7,
-      pointHoverBorderColor: '#0C0C0F',
-      pointHoverBorderWidth: '2',
-      pointHoverBackgroundColor: '#FF6197',
-      borderColor: '#0C0C0F',
-      borderWidth: '2'
-    }
-  ]
+  ...processData(pickedMoods.value)
+  // labels: xAxisLabels,
+  // datasets: [
+  //   {
+  //     data: pickedMoodsValues,
+  //     pointStyle: 'circle',
+  //     pointRadius: 7,
+  //     pointBorderColor: '#0C0C0F',
+  //     pointBorderWidth: '2',
+  //     pointBackgroundColor: '#C2FFDE',
+  //     pointHoverRadius: 7,
+  //     pointHoverBorderColor: '#0C0C0F',
+  //     pointHoverBorderWidth: '2',
+  //     pointHoverBackgroundColor: '#FF6197',
+  //     borderColor: '#0C0C0F',
+  //     borderWidth: '2'
+  //   }
+  // ]
 }
 
 const getOrCreateTooltip = (chart: any) => {
